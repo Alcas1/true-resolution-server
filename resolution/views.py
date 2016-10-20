@@ -11,6 +11,10 @@ def index(request):
     return HttpResponse('<pre>' + r.text + '</pre>')
 
 
+def resolutions(request):
+
+    return render(request, 'test.html')
+
 
 def db(request):
 

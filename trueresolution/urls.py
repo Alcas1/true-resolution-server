@@ -10,7 +10,8 @@ import resolution.views
 # url(r'^blog/', include('blog.urls')),
 
 urlpatterns = [
-    url(r'^$', hello.views.index, name='index'),
-    url(r'^db', hello.views.db, name='db'),
+    url(r'^$', resolution.views.index, name='index'),
+    url(r'^db', resolution.views.db, name='db'),
+    url(r'^resolutions$', resolution.views.resolutions, name='resolutions'),
     url(r'^admin/', include(admin.site.urls)),
 ]
