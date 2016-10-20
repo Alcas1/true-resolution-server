@@ -13,7 +13,7 @@ def index(request):
 
 def resolutions(request):
 
-    return render(request, 'resolution/test.html')
+    return render(request, 'test.html')
 
 
 def db(request):
