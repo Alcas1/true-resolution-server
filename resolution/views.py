@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import requests
 
-from .models import Greeting
+from .models import resolutions
 
 # Create your views here.
 def index(request):
@@ -13,6 +13,8 @@ def index(request):
 def resolutions(request):
 
     return render(request, 'test.html')
+
+
 
 
 def db(request):
