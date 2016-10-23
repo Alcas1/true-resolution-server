@@ -12,6 +12,6 @@ import resolution.views
 urlpatterns = [
     url(r'^$', resolution.views.index, name='index'),
     url(r'^db', resolution.views.db, name='db'),
-    url(r'^resolutions', resolution.views.resolutions, name='resolutions'),
+    url(r'^insertResolution',resolutions.views.insertResolution),
     url(r'^admin/', include(admin.site.urls)),
 ]

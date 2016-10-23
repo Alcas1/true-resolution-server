@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from resolution.models import Resolution
+
+import sys
 import requests
 
-from .models import Greeting
+
 
 # Create your views here.
 def index(request):
@@ -15,9 +19,20 @@ def resolutions(request):
     return render(request, 'test.html')
 
 
+
+def insertResolution(request):
+    res= Resolution(height=2,width=2,pixel_density=2.2)
+    sys.stdout.flush()
+    #res = resolutions()
+    #resolutions.create(height=2,width=2,pixel_density=2.2)
+    res.save()
+    return HttpResponse(res);
+
+
+
 def db(request):
 
-    greeting = Greeting()
+    greeting = resolutions()
     greeting.save()
 
     greetings = Greeting.objects.all()

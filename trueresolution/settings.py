@@ -12,12 +12,12 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 import dj_database_url
 
-
+heroku_db="postgres://wrxjaddnpnuxlw:PPgeYkLhHNM6ud5KFW2YqssEfs@ec2-54-221-225-242.compute-1.amazonaws.com:5432/d7reko8ll6edcm"
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-DATABASES = { 'default': dj_database_url.config() }
-
+DATABASES = { 'default': dj_database_url.config(default=heroku_db) }
+print dj_database_url.config()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -76,14 +76,14 @@ WSGI_APPLICATION = 'trueresolution.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+'''
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
