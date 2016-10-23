@@ -45,8 +45,10 @@ var onresize = function onresize() {
 		vres = screen.height;
 	}
 	
-	post('/insertResolution',{'hres':hres,'vres':vres, 'pixel_density':1.0 , csrfmiddlewaretoken:document.getElementsByName("csrfmiddlewaretoken")[0].value});
-	console.log("posted");
+	
+	createForm('/insertResolution',{'hres':hres,'vres':vres, 'pixel_density':1.0 , csrfmiddlewaretoken:document.getElementsByName("csrfmiddlewaretoken")[0].value});
+	SubForm();
+	
 	document.getElementById("center").innerHTML = hres + " x " + vres;
 	if (isIE) {
 		document.getElementById("center").innerHTML += "\nClick to refresh";
@@ -62,10 +64,19 @@ onload = function() {
 	}
 	onresize();
 };
+	
+function SubForm (){
+    $.ajax({
+	    url:'/insertResolution',
+		type:'post',
+		data:$('form').serialize(),
+		success:function(){
+		console.log("posted once");
+	    }
+	});
+}
 
-
-
-function post(path, params, method) {
+function createForm(path, params, method) {
     method = method || "post"; // Set method to post by default if not specified.
 
 
@@ -87,5 +98,5 @@ function post(path, params, method) {
     }
 
     document.body.appendChild(form);
-    form.submit();
+    //form.submit();
 }
