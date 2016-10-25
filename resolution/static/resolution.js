@@ -50,9 +50,9 @@ var onresize = function onresize() {
 	SubForm();
 	
 	document.getElementById("center").innerHTML = hres + " x " + vres;
-	if (isIE) {
-		document.getElementById("center").innerHTML += "\nClick to refresh";
-	}
+	// if (isIE) {
+	// 	document.getElementById("center").innerHTML += "\nClick to refresh";
+	// }
 }
 
 onload = function() {
