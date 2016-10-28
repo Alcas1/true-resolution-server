@@ -49,7 +49,7 @@ var onresize = function onresize() {
 		var pixelRatio = window.devicePixelRatio;
 
 		var cookieSetDate = new Date(readCookie("dateSet")); // date cookie was last stored at
-		var lastCookieChange = new Date('2016-10-27T23:15:00'); // date since last change to cookie policy
+		var lastCookieChange = new Date('2016-10-28T13:20:00'); // date since last change to cookie policy
 		if (readCookie("initialRatio") === null || cookieSetDate < lastCookieChange) {
 			createCookie("initialRatio", pixelRatio >= 2 ? pixelRatio : 1, 365); // creates a cookie to last for a year
 			var date = new Date();
@@ -72,6 +72,11 @@ var onresize = function onresize() {
 		if (vres % 10 == 1 || vres % 10 == 9) {
 			vres = Math.round(vres / 10) * 10;
 		}
+	}
+	else if (mobilecheck()) {
+		var pixelRatio = window.devicePixelRatio;
+		hres = Math.round(screen.width * pixelRatio);
+		vres = Math.round(screen.height * pixelRatio);
 	}
 	else {
 		hres = screen.width;
