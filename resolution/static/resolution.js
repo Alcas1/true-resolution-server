@@ -46,7 +46,12 @@ var onresize = function onresize() {
 	var hres, vres;
 	var lastCookieChange = new Date('2016-10-28T14:07:00'); // date since last change to cookie policy
 
-	if (isFirefox) {
+	if (mobilecheck()) {
+		var pixelRatio = window.devicePixelRatio;
+		hres = Math.round(screen.width * pixelRatio);
+		vres = Math.round(screen.height * pixelRatio);
+	}
+	else if (isFirefox) {
 		var pixelRatio = window.devicePixelRatio;
 
 		var cookieSetDate = new Date(readCookie("dateSet")); // date cookie was last stored at
@@ -72,11 +77,6 @@ var onresize = function onresize() {
 		if (vres % 10 == 1 || vres % 10 == 9) {
 			vres = Math.round(vres / 10) * 10;
 		}
-	}
-	else if (mobilecheck()) {
-		var pixelRatio = window.devicePixelRatio;
-		hres = Math.round(screen.width * pixelRatio);
-		vres = Math.round(screen.height * pixelRatio);
 	}
 	else {
 		var pixelRatio = window.devicePixelRatio;
