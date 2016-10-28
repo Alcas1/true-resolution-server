@@ -40,8 +40,13 @@ var onresize = function onresize() {
 
 	if (isFirefox) {
 		var pixelRatio = window.devicePixelRatio;
-		if (readCookie("initialRatio") === null) {
+
+		var cookieSetDate = new Date(readCookie("dateSet")); // date cookie was last stored at
+		var lastCookieChange = new Date('2016-10-27T23:15:00'); // date since last change to cookie policy
+		if (readCookie("initialRatio") === null || cookieSetDate < lastCookieChange) {
 			createCookie("initialRatio", pixelRatio >= 2 ? pixelRatio : 1, 365); // creates a cookie to last for a year
+			var date = new Date();
+			createCookie("dateSet", date.toGMTString(), 365);
 		}
 		pixelRatio /= readCookie("initialRatio");
 
@@ -67,8 +72,8 @@ var onresize = function onresize() {
 	}
 	
 	
-	createForm('/insertResolution',{'hres':hres,'vres':vres, 'pixel_density':1.0 , csrfmiddlewaretoken:document.getElementsByName("csrfmiddlewaretoken")[0].value});
-	SubForm();
+	// createForm('/insertResolution',{'hres':hres,'vres':vres, 'pixel_density':1.0 , csrfmiddlewaretoken:document.getElementsByName("csrfmiddlewaretoken")[0].value});
+	// SubForm();
 	
 	document.getElementById("center").innerHTML = hres + " x " + vres;
 	if (isIE) {
