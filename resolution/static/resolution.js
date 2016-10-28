@@ -44,12 +44,12 @@ var readCookie = function readCookie(name) {
 
 var onresize = function onresize() {
 	var hres, vres;
+	var lastCookieChange = new Date('2016-10-28T14:00:00'); // date since last change to cookie policy
 
 	if (isFirefox) {
 		var pixelRatio = window.devicePixelRatio;
 
 		var cookieSetDate = new Date(readCookie("dateSet")); // date cookie was last stored at
-		var lastCookieChange = new Date('2016-10-28T13:20:00'); // date since last change to cookie policy
 		if (readCookie("initialRatio") === null || cookieSetDate < lastCookieChange) {
 			createCookie("initialRatio", pixelRatio >= 2 ? pixelRatio : 1, 365); // creates a cookie to last for a year
 			var date = new Date();
@@ -79,8 +79,18 @@ var onresize = function onresize() {
 		vres = Math.round(screen.height * pixelRatio);
 	}
 	else {
-		hres = screen.width;
-		vres = screen.height;
+		var pixelRatio = window.devicePixelRatio;
+
+		// To account for people adjusted screen resolutions because of Windows internal zoom
+		var cookieSetDate = new Date(readCookie("dateSet")); // date cookie was last stored at
+		if (readCookie("initialRatio") === null || cookieSetDate < lastCookieChange) {
+			createCookie("initialRatio", pixelRatio < 2 ? pixelRatio : 1); // creates a cookie to last for a year
+			var date = new Date();
+			createCookie("dateSet", date.toGMTString(), 365);
+		}
+
+		hres = screen.width * readCookie("initialRatio");
+		vres = screen.height * readCookie("initialRatio");
 	}
 	
 	
