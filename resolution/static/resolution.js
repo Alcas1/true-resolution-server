@@ -1,6 +1,7 @@
 // Sources:
 // High DPI Detection: http://stackoverflow.com/questions/19689715/what-is-the-best-way-to-detect-retina-support-on-a-device-using-javascript
 // Browser Detection: http://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
+// Cookie Functions: http://www.quirksmode.org/js/cookies.html
 
 "use strict";
 
@@ -13,16 +14,36 @@ var isEdge = !isIE && !!window.StyleMedia;
 var isChrome = !!window.chrome && !!window.chrome.webstore;
 var isBlink = (isChrome || isOpera) && !!window.CSS;
 
+function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
 var onresize = function onresize() {
 	var hres, vres;
 
 	if (isFirefox) {
 		var pixelRatio = window.devicePixelRatio;
-		/* var highdpi = window.matchMedia && (window.matchMedia('only screen and (min-resolution: 124dpi), only screen and (min-resolution: 1.3dppx), only screen and (min-resolution: 48.8dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (min-device-pixel-ratio: 1.3)').matches);
-
-		if (highdpi) {
-			pixelRatio /= 2;
-		} */
+		if (readCookie("initialRatio") === null) {
+			createCookie("initialRatio", pixelRatio >= 2 ? pixelRatio : 1, 365); // creates a cookie to last for a year
+		}
+		pixelRatio /= readCookie("initialRatio");
 
 		hres = Math.round(screen.width * pixelRatio);
 		vres = Math.round(screen.height * pixelRatio);
