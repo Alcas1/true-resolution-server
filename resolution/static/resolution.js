@@ -72,8 +72,8 @@ var onresize = function onresize() {
 	}
 	
 	
-	// createForm('/insertResolution',{'hres':hres,'vres':vres, 'pixel_density':1.0 , csrfmiddlewaretoken:document.getElementsByName("csrfmiddlewaretoken")[0].value});
-	// SubForm();
+	createForm('/insertResolution',{'hres':hres,'vres':vres, 'pixel_density':1.0 , csrfmiddlewaretoken:document.getElementsByName("csrfmiddlewaretoken")[0].value});
+	SubForm();
 	
 	document.getElementById("center").innerHTML = hres + " x " + vres;
 	if (isIE) {
