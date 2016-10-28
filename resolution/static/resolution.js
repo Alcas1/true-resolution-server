@@ -45,7 +45,7 @@ var readCookie = function readCookie(name) {
 var onresize = function onresize() {
 	var hres, vres;
 
-	if (isFirefox || mobilecheck()) {
+	if (isFirefox) {
 		var pixelRatio = window.devicePixelRatio;
 
 		var cookieSetDate = new Date(readCookie("dateSet")); // date cookie was last stored at
