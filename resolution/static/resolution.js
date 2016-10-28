@@ -44,7 +44,7 @@ var readCookie = function readCookie(name) {
 
 var onresize = function onresize() {
 	var hres, vres;
-	var lastCookieChange = new Date('2016-10-28T14:00:00'); // date since last change to cookie policy
+	var lastCookieChange = new Date('2016-10-28T14:07:00'); // date since last change to cookie policy
 
 	if (isFirefox) {
 		var pixelRatio = window.devicePixelRatio;
@@ -84,7 +84,7 @@ var onresize = function onresize() {
 		// To account for people adjusted screen resolutions because of Windows internal zoom
 		var cookieSetDate = new Date(readCookie("dateSet")); // date cookie was last stored at
 		if (readCookie("initialRatio") === null || cookieSetDate < lastCookieChange) {
-			createCookie("initialRatio", pixelRatio < 2 ? pixelRatio : 1); // creates a cookie to last for a year
+			createCookie("initialRatio", pixelRatio < 2 ? pixelRatio : 1, 365); // creates a cookie to last for a year
 			var date = new Date();
 			createCookie("dateSet", date.toGMTString(), 365);
 		}
