@@ -6,6 +6,7 @@ class Resolution(models.Model):
     height = models.IntegerField()
     width = models.IntegerField()
     pixel_density = models.DecimalField(max_digits=9,decimal_places=6)
+    cookie = models.CharField(max_length=500,null=True)
     time_stamp = models.DateTimeField('date created', auto_now_add=True)
     
     @classmethod

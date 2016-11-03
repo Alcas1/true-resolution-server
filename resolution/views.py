@@ -27,7 +27,7 @@ def insertResolution(request):
 
     print ip
     sys.stdout.flush()
-    res= Resolution(height=request.POST['hres'],width=request.POST['vres'],pixel_density=request.POST['pixel_density'])
+    res= Resolution(height=request.POST['hres'],width=request.POST['vres'],cookie=(request.POST['cookie']+"-"+ip) ,pixel_density=request.POST['pixel_density'])
     res.save()
     return redirect(index);
 

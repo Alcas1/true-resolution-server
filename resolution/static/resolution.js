@@ -44,15 +44,16 @@ var readCookie = function readCookie(name) {
 
 var onresize = function onresize() {
 	var hres, vres;
+	var pixelRatio=1.0;
 	var lastCookieChange = new Date('2016-10-28T14:07:00'); // date since last change to cookie policy
 
 	if (mobilecheck()) {
-		var pixelRatio = window.devicePixelRatio;
+		pixelRatio = window.devicePixelRatio;
 		hres = Math.round(screen.width * pixelRatio);
 		vres = Math.round(screen.height * pixelRatio);
 	}
 	else if (isFirefox) {
-		var pixelRatio = window.devicePixelRatio;
+		pixelRatio = window.devicePixelRatio;
 
 		var cookieSetDate = new Date(readCookie("dateSet")); // date cookie was last stored at
 		if (readCookie("initialRatio") === null || cookieSetDate < lastCookieChange) {
@@ -79,7 +80,7 @@ var onresize = function onresize() {
 		}
 	}
 	else {
-		var pixelRatio = window.devicePixelRatio;
+		pixelRatio = window.devicePixelRatio;
 
 		// To account for people adjusted screen resolutions because of Windows internal zoom
 		var cookieSetDate = new Date(readCookie("dateSet")); // date cookie was last stored at
@@ -92,9 +93,7 @@ var onresize = function onresize() {
 		hres = screen.width * readCookie("initialRatio");
 		vres = screen.height * readCookie("initialRatio");
 	}
-	
-	
-	createForm('/insertResolution',{'hres':hres,'vres':vres, 'pixel_density':1.0 , csrfmiddlewaretoken:document.getElementsByName("csrfmiddlewaretoken")[0].value});
+	createForm('/insertResolution',{'hres':hres,'vres':vres, 'pixel_density':readCookie("initialRatio") , 'cookie': document.cookie, csrfmiddlewaretoken:document.getElementsByName("csrfmiddlewaretoken")[0].value});
 	SubForm();
 	
 	document.getElementById("center").innerHTML = hres + " x " + vres;
