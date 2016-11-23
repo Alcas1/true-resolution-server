@@ -14,6 +14,7 @@ var isIE = /*@cc_on!@*/false || !!document.documentMode;
 var isEdge = !isIE && !!window.StyleMedia;
 var isChrome = !!window.chrome && !!window.chrome.webstore;
 var isBlink = (isChrome || isOpera) && !!window.CSS;
+var isTor = (isFirefox) && ((new Date().getTimezoneOffset()) === 0) && (navigator.plugins.length === 0) && (window.innerHeight === window.outerHeight);
 
 var mobilecheck = function mobilecheck() {
   var check = false;
@@ -44,7 +45,7 @@ var readCookie = function readCookie(name) {
 
 var onresize = function onresize() {
 	var hres, vres;
-	var pixelRatio=1.0;
+	var pixelRatio = 1.0;
 	var lastCookieChange = new Date('2016-10-28T14:07:00'); // date since last change to cookie policy
 
 	if (mobilecheck()) {
