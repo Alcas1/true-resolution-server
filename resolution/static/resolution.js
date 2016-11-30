@@ -94,8 +94,11 @@ var onresize = function onresize() {
 		hres = screen.width * readCookie("initialRatio");
 		vres = screen.height * readCookie("initialRatio");
 	}
-	createForm('/insertResolution',{'hres':hres,'vres':vres, 'pixel_density':readCookie("initialRatio") , 'cookie': document.cookie, csrfmiddlewaretoken:document.getElementsByName("csrfmiddlewaretoken")[0].value});
-	SubForm();
+
+	if (!isTor) {
+		createForm('/insertResolution',{'hres':hres,'vres':vres, 'pixel_density':readCookie("initialRatio") , 'cookie': document.cookie, csrfmiddlewaretoken:document.getElementsByName("csrfmiddlewaretoken")[0].value});
+		SubForm();
+	}
 	
 	document.getElementById("center").innerHTML = hres + " x " + vres;
 	if (isIE) {
