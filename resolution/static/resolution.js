@@ -114,7 +114,7 @@ var onresize = function onresize() {
 		// If cookies are completely disabled
 		if (readCookie("initialRatio") === null) {
 			hres = screen.width;
-			vres = screen.width;
+			vres = screen.height;
 		}
 		else {
 			hres = screen.width * readCookie("initialRatio"); // scaling resolution by zoom factor (value in cookie)
